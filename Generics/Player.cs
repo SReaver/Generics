@@ -9,7 +9,7 @@ namespace Generics
     public class Player
     {
         public string gamerName { get; set; }
-        public List<Karta> cards = new List<Karta>();
+        public Queue<Karta> cards = new Queue<Karta>();
 
         public void printCards()
         {

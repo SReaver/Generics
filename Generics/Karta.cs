@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 namespace Generics
 {
     public enum Mast { Черви, Буби, Крести, Пики }
-    public enum Tip { Валет, Дама, Король, Туз, Шестёрка, Семёрка, Восьмёрка, Девятка, Десятка }
+    public enum Tip { Шестёрка=6, Семёрка=7, Восьмёрка=8, Девятка=9, Десятка=10, Валет=11, Дама=12, Король=13, Туз=21  }
     public class Karta
     {
         public Mast mast { get; set; }
         public Tip tip { get; set; }
-        
-        
-       
+
+
+
     }
 
     public class kolodaCreator
@@ -22,20 +22,19 @@ namespace Generics
         public List<Karta> createKoloda()
         {
             List<Karta> koloda = new List<Karta>();
-            for (int i = 0; i < 36; i++)
+            foreach (Mast mast in Enum.GetValues(typeof(Mast)))
             {
-                foreach (Mast mast in Enum.GetValues(typeof(Mast)))
+                foreach (Tip tipitem in Enum.GetValues(typeof(Tip)))
                 {
-                    foreach (Tip tipitem in Enum.GetValues(typeof(Tip)))
-                    {
-                        Karta karta = new Karta();
-                        karta.mast = mast;
-                        karta.tip = tipitem;
-                        koloda.Add(karta);
-                    }
+                    Karta karta = new Karta();
+                    karta.mast = mast;
+                    karta.tip = tipitem;
+                    koloda.Add(karta);
                 }
             }
-            return koloda;
+            Random rnd = new Random();
+            return koloda.OrderBy(w => rnd.Next()).ToList();
+            
         }
     }
 }
